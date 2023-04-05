@@ -1,5 +1,6 @@
 from pprint import pprint
 class Graph:
+    adjacencyList: map = {}
     def __init__(self):
         self.adjacencyList: map = {}
 
@@ -140,16 +141,19 @@ class Graph:
     def bidirectionalSearch(self, start: str, target: str): # not sure about this signature. check it out
         # not sure about the exact shape of the return value. but it should include the path found and the total cost.
         pass
-
-    def greedySearch(self, start: str, target: str, heuristic: any):
-        """returns a dictionary with the following shape:
-        {
-        path: [list of nodes from 'start' to 'target']
-        cost: total cost of going through the path (should be float)
-        }
-        if no path found, return null
-        """
-        pass
+ def greedy(self, node: str):
+        stack = [node]
+        app = []
+        while stack:
+            current = stack.pop()
+            print(current)
+            for i in self.adjacencyList[current]:
+                app.append(i[1])
+            if app == []:
+                break
+            check = app.index(min(app))
+            stack.append(self.adjacencyList[current][check][0])
+            app.clear()
 
     def aStarSearch(self, start: str, target: str, heuristic: any):
         """returns a dictionary with the following shape:
@@ -159,9 +163,33 @@ class Graph:
         }"""
         pass
 
-    def degree(self, node: str)-> float:
-        """returns a float"""
-        pass
+     def degree(self):
+        # dgreeof centrality = number of connected nodes/nodes-1
+        app = []
+        chek = []
+        final = []
+        second = []
+        finalNode = []
+        for i in self.adjacencyList:
+            app.append(i)
+        numberofnodes = len(app)
+        denumrator = numberofnodes - 1
+        for j in self.adjacencyList:
+            dgree = len(self.adjacencyList[j])
+            temp = [j, dgree / denumrator]
+            chek.append(temp)
+        print("degree centrality of Nodes", chek)
+        for k in chek:
+            final = k[1]
+            second.append(final)
+        second.sort()
+        for i in range(len(second) - 1, len(second) - 4, -1):
+
+            for l in chek:
+                if l[1] == second[i]:
+                    temp2 = [l[0], l[1]]
+                    finalNode.append(temp2)
+        print("the three Nodes highest in degree centrality in order  are", finalNode)
 
     def closeness(self, node: str) -> float:
         # not sure about what this method should return. you guys do it.
