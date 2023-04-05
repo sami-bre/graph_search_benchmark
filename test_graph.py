@@ -1,6 +1,8 @@
 from graph import Graph
 
+
 graph = Graph()
+
 
 print("\nAdding nodes a, b, c, d, e, f")
 for item in ['a', 'b', 'c', 'd', 'e', 'f']:
@@ -8,7 +10,7 @@ for item in ['a', 'b', 'c', 'd', 'e', 'f']:
 
 graph.show()
 
-graph.addEdge('a', 'b')
+graph.addEdge('', 'b')
 graph.addEdge('b', 'a')
 graph.addEdge('b', 'c')
 graph.addEdge('b', 'd')
@@ -16,6 +18,8 @@ graph.addEdge('a', 'd')
 graph.addEdge('d', 'e')
 graph.addEdge('b', 'e')
 graph.addEdge('c', 'e')
+
+graph.aStarSearch("a","e")
 
 print(f"\ndoes node a exist? : {graph.nodeExists('a')}")
 print(f"does node z exist? : {graph.nodeExists('z')}")
