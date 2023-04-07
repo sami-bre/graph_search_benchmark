@@ -1,5 +1,4 @@
 from pprint import pprint
-from queue import PriorityQueue
 class Graph:
     def __init__(self):
         self.adjacencyList: map = {}
@@ -158,42 +157,41 @@ class Graph:
         path: [list of nodes from 'start' to 'target'] (path should be the optimal solution)
         cost: total cost of going through the path (should be float)
         }"""
-
         def return_path(current_node):
             path = []
-           
             while current_node:
-                path.append(current_node[1])
-                if current_node[1] == start:
-                    return {"path": path[::-1],"cost" :node_data[path[0]]["g_cost"] }
-                current_node = node_data[current_node[1]]["prev"]
+                path.append(current_node)
+                current_node = node_data[current_node]["prev"]
+
+            return path
+
 
         node_data = {}
-        for node in self.adjacencyList.keys():
+        for node in self.adjacencyList.key():
             node_data[node] = {
 
                 "h_cost" : heuristic(node,target),
                 "g_cost" : float("inf"),
                 "prev" : None,
             }
-               
+        
+        
         yet_to_be_visited = PriorityQueue()
         yet_to_be_visited.put((0,start))
         
         while yet_to_be_visited:
             node_weight,current_node = yet_to_be_visited.get()
-            
 
             if current_node == target:
-                return return_path((node_weight,current_node))
+                return return_path(current_node)
 
             for neighbor in self.adjacencyList[current_node]:
                 new_cost = node_weight + neighbor[1]
 
-                if new_cost < node_data[neighbor[0]]["g_cost"]:
-                    node_data[neighbor[0]]["g_cost"] = new_cost
+                if new_cost < node_data[neighbor]["g_cost"]:
+                    node_data[neighbor]["g_cost"] = new_cost
                     yet_to_be_visited.put((new_cost,neighbor[0]))
-                    node_data[neighbor[0]]["prev"] = (node_weight,current_node)
+                    node_data[neighbor]["prev"] = current_node
 
 
 
