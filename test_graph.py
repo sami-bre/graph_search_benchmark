@@ -157,5 +157,5 @@ romania.show()
 
 
 print("result of doing aStar search from Arad to Bucharest:")
-result = romania.aStarSearch("Arad", "Bucharest", heuristic=haversine_distance)
+result = romania.aStarSearch("Zerind", "Sibiu", heuristic=haversine_distance)
 print(result)
